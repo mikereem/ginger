@@ -23,8 +23,10 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 public class GingerUtils {
-    public static final char PROPERTY_KEY_DELIMETER = '.';
 
+    /**
+     * Change: simply use the method name without any transformation.
+     */
     public static String createKeyFromMethod(Method method) {
         Localizable.Key annotation = method.getAnnotation(Localizable.Key.class);
         if (annotation != null) {
@@ -33,20 +35,8 @@ public class GingerUtils {
 
         // Fallback previous behaviour
         String methodName = method.getName();
-        String[] words = StringUtils.splitByCharacterTypeCamelCase(methodName);
-        StringBuilder keyBuilder = new StringBuilder(methodName.length() + words.length - 1);
 
-        boolean first = true;
-        for (String word : words) {
-            if (first) {
-                first = false;
-            } else {
-                keyBuilder.append(PROPERTY_KEY_DELIMETER);
-            }
-            keyBuilder.append(word.toLowerCase());
-        }
-
-        return keyBuilder.toString();
+        return methodName;
     }
 
     public static boolean isConstantMethod(Method method) {
