@@ -55,7 +55,7 @@ public class PropertiesLocalizationLoader implements LocalizationLoader {
 
     @Override
     public PropertyResolver load(InputStream inputStream) throws IOException {
-        MatchingReader reader = new MatchingReader(new BufferedReader(new InputStreamReader(inputStream)));
+        MatchingReader reader = new MatchingReader(new BufferedReader(new InputStreamReader(inputStream, "UTF-8")));
         return load(reader);
     }
 
